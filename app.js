@@ -1,34 +1,32 @@
 import express from "express";
+import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
-import "dotenv/config";
 
 import errorHandler from "./src/utils/errorHandler.js";
 import defaultRoute from "./src/routes/default.route.js";
 
-//? define app
+//? app configuration
 const app = express();
-
-//? use middlewares
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-//? define routes
-app.use("/api/v1", defaultRoute);
-
-//? database config
+//? database configuration
 const uri = process.env.DB_URI;
 
-const options = {
+const databaseConfig = {
   user: process.env.DB_USERNAME,
   pass: process.env.DB_PASSWORD,
 };
 
 //? database connection
 mongoose
-  .connect(uri, options)
+  .connect(uri, databaseConfig)
   .then(() => console.log("database connected!"))
   .catch((error) => console.log(`DB error: ${error}`));
+
+//? handle routes
+app.use("/api/v1", defaultRoute);
 
 //? handle undefined routes
 app.all(/(.*)/, (req, res) => {
@@ -38,7 +36,7 @@ app.all(/(.*)/, (req, res) => {
   });
 });
 
-//? handle global errors
+//? handle errors
 app.use(errorHandler);
 
 export default app;
