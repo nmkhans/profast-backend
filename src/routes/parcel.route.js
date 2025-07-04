@@ -10,4 +10,7 @@ router.get("/", parcelController.getAllParcel);
 //~ create new parcel
 router.post("/", parcelController.createParcel);
 
+//~ delete a parcel
+router.delete("/delete/:id", parcelController.deleteParcel);
+
 export default router;

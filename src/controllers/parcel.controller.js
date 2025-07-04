@@ -45,4 +45,27 @@ controllers.createParcel = async (req, res, next) => {
   }
 };
 
+//~ delete a parcel
+controllers.deleteParcel = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Parcel.deleteOne({ _id: id });
+
+    if (data.deletedCount > 0) {
+      res.status(status.OK).json({
+        success: true,
+        message: "Parcel deleted.",
+      });
+    } else {
+      res.status(status.NOT_FOUND).json({
+        success: false,
+        message: `No parcel found with id - ${id}`,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default controllers;
