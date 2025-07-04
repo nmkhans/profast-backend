@@ -3,8 +3,10 @@ import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import errorHandler from "./src/utils/errorHandler.js";
+//~ routes import
+import handleError from "./src/utils/errorHandler.js";
 import defaultRoute from "./src/routes/default.route.js";
+import parcelRoute from "./src/routes/parcel.route.js";
 
 //? app configuration
 const app = express();
@@ -27,6 +29,7 @@ mongoose
 
 //? handle routes
 app.use("/api/v1", defaultRoute);
+app.use("/api/v1/parcels", parcelRoute);
 
 //? handle undefined routes
 app.all(/(.*)/, (req, res) => {
@@ -37,6 +40,6 @@ app.all(/(.*)/, (req, res) => {
 });
 
 //? handle errors
-app.use(errorHandler);
+app.use(handleError);
 
 export default app;
