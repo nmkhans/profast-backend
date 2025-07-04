@@ -6,7 +6,17 @@ const controllers = {};
 //~ get all parcel
 controllers.getAllParcel = async (req, res, next) => {
   try {
-    const data = await Parcel.find({});
+    const { email } = req.query;
+
+    let query = {};
+
+    if (email) {
+      query = { createdBy: email };
+    }
+
+    const data = await Parcel.find(query).sort({
+      createdAt: -1,
+    });
 
     res.status(status.OK).json({
       success: true,
