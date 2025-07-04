@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
+import status from "http-status";
 
 //~ routes import
 import handleError from "./src/utils/errorHandler.js";
@@ -33,7 +34,7 @@ app.use("/api/v1/parcels", parcelRoute);
 
 //? handle undefined routes
 app.all(/(.*)/, (req, res) => {
-  res.status(404).json({
+  res.status(status.NOT_FOUND).json({
     success: false,
     message: "route was not found!",
   });

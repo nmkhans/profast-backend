@@ -4,7 +4,10 @@ import parcelController from "../controllers/parcel.controller.js";
 
 const router = express.Router();
 
-//? create new parcel
+//~ get all parcel
+router.get("/", parcelController.getAllParcel);
+
+//~ create new parcel
 router.post("/", parcelController.createParcel);
 
 export default router;
