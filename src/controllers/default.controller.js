@@ -1,5 +1,7 @@
+import status from "http-status";
+
 const defaultController = (req, res) => {
-  res.status(200).json({
+  res.status(status.OK).json({
     success: true,
     message: "Server is running...",
   });
