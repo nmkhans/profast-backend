@@ -8,6 +8,7 @@ import status from "http-status";
 import handleError from "./src/utils/errorHandler.js";
 import defaultRoute from "./src/routes/default.route.js";
 import parcelRoute from "./src/routes/parcel.route.js";
+import paymentRoute from "./src/routes/payment.route.js";
 
 //? app configuration
 const app = express();
@@ -31,6 +32,7 @@ mongoose
 //? handle routes
 app.use("/api/v1", defaultRoute);
 app.use("/api/v1/parcels", parcelRoute);
+app.use("/api/v1/payment", paymentRoute);
 
 //? handle undefined routes
 app.all(/(.*)/, (req, res) => {

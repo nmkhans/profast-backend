@@ -7,6 +7,9 @@ const router = express.Router();
 //~ get all parcel
 router.get("/", parcelController.getAllParcel);
 
+//~ get parcel detail
+router.get("/detail/:id", parcelController.getParcelDetail);
+
 //~ create new parcel
 router.post("/", parcelController.createParcel);
 

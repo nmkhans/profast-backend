@@ -28,6 +28,23 @@ controllers.getAllParcel = async (req, res, next) => {
   }
 };
 
+//~ get parcel detail
+controllers.getParcelDetail = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const data = await Parcel.findOne({ _id: id });
+
+    res.status(status.OK).json({
+      success: true,
+      message: `Detail for parcel with id - ${id}`,
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 //~ create new parcel
 controllers.createParcel = async (req, res, next) => {
   try {
