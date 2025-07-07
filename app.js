@@ -9,6 +9,9 @@ import handleError from "./src/utils/errorHandler.js";
 import defaultRoute from "./src/routes/default.route.js";
 import parcelRoute from "./src/routes/parcel.route.js";
 import paymentRoute from "./src/routes/payment.route.js";
+import trackingRoute from "./src/routes/tracking.route.js";
+import userRoute from "./src/routes/user.route.js";
+import riderRoute from "./src/routes/rider.route.js";
 
 //? app configuration
 const app = express();
@@ -33,6 +36,9 @@ mongoose
 app.use("/api/v1", defaultRoute);
 app.use("/api/v1/parcels", parcelRoute);
 app.use("/api/v1/payment", paymentRoute);
+app.use("/api/v1/trackings", trackingRoute);
+app.use("/api/v1/users", userRoute);
+app.use("/api/v1/riders", riderRoute);
 
 //? handle undefined routes
 app.all(/(.*)/, (req, res) => {

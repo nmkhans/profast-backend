@@ -1,11 +1,11 @@
 import express from "express";
-
 import parcelController from "../controllers/parcel.controller.js";
+import { verifyToken } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
 //~ get all parcel
-router.get("/", parcelController.getAllParcel);
+router.get("/", verifyToken, parcelController.getAllParcel);
 
 //~ get parcel detail
 router.get("/detail/:id", parcelController.getParcelDetail);
